@@ -1,45 +1,78 @@
-# Об'єднання елементів масиву в один рядок за допомогою циклу for
-def concatenate_with_for(array):
-    result = ""
-    for i in range(len(array)):
-        result += array[i]
-        if i < len(array) - 1:
-            result += ","
-    return result
+function logItems(array) {
+    for (let i = 0; i < array.length; i++) {
+        console.log(`${i + 1} - ${array[i]}`);
+    }
+}
 
-# Об'єднання елементів масиву в один рядок за допомогою join()
-def concatenate_with_join(array):
-    return ",".join(array)
+logItems(['Mango', 'Poly', 'Ajax']);
 
-# Приклади використання
-array = ["apple", "banana", "cherry"]
-print(concatenate_with_for(array))  # Виведе: apple,banana,cherry
-print(concatenate_with_join(array))  # Виведе: apple,banana,cherry
+function calculateEngravingPrice(message, pricePerWord) {
+    const words = message.split(" ");
+    return words.length * pricePerWord;
+}
 
-# Робота з колекцією карток в Trello
-cards = ["Card 1", "Card 2", "Card 3", "Card 4"]
+console.log(calculateEngravingPrice("Hello world", 10));
 
-# Видалити картку
-def remove_card(cards, index):
-    if 0 <= index < len(cards):
-        cards.pop(index)
+function findLongestWord(string) {
+    const words = string.split(" ");
+    let longestWord = "";
+    for (const word of words) {
+        if (word.length > longestWord.length) {
+            longestWord = word;
+        }
+    }
+    return longestWord;
+}
 
-# Додати картку
-def add_card(cards, index, card):
-    if 0 <= index <= len(cards):
-        cards.insert(index, card)
+console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
 
-# Оновити картку
-def update_card(cards, index, new_card):
-    if 0 <= index < len(cards):
-        cards[index] = new_card
+function formatString(string) {
+    if (string.length <= 40) {
+        return string;
+    } else {
+        return string.slice(0, 40) + "...";
+    }
+}
 
-# Приклади використання
-remove_card(cards, 1)
-print(cards)  # Виведе: ['Card 1', 'Card 3', 'Card 4']
+console.log(formatString("This string is exactly forty characters long."));
+console.log(formatString("This string is definitely longer than forty characters long and needs to be shortened."));
 
-add_card(cards, 1, "New Card")
-print(cards)  # Виведе: ['Card 1', 'New Card', 'Card 3', 'Card 4']
+function checkForSpam(message) {
+    const lowercasedMessage = message.toLowerCase();
+    return lowercasedMessage.includes("spam") || lowercasedMessage.includes("sale");
+}
 
-update_card(cards, 1, "Updated Card")
-print(cards)  # Виведе: ['Card 1', 'Updated Card', 'Card 3', 'Card 4']
+
+console.log(checkForSpam("Get the best SALE offers now!")); 
+console.log(checkForSpam("Important information about your account")); 
+
+let input;
+const numbers = [];
+let total = 0;
+
+while (true) {
+    input = prompt("Введіть число:");
+
+    if (input === null) {
+        break;
+    }
+
+    input = Number(input);
+
+    if (isNaN(input)) {
+        alert("Було введено не число, попробуйте ще раз");
+        continue;
+    }
+
+    numbers.push(input);
+}
+
+if (numbers.length > 0) {
+    for (const number of numbers) {
+        total += number;
+    }
+    console.log(`Загальна сума чисел дорівнює ${total}`);
+} else {
+    console.log("Жодного числа не було введено");
+}
+
