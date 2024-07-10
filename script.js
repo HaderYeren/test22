@@ -1,78 +1,42 @@
-function logItems(array) {
+
+function arrayToStringUsingFor(array) {
+    let result = "";
     for (let i = 0; i < array.length; i++) {
-        console.log(`${i + 1} - ${array[i]}`);
-    }
-}
-
-logItems(['Mango', 'Poly', 'Ajax']);
-
-function calculateEngravingPrice(message, pricePerWord) {
-    const words = message.split(" ");
-    return words.length * pricePerWord;
-}
-
-console.log(calculateEngravingPrice("Hello world", 10));
-
-function findLongestWord(string) {
-    const words = string.split(" ");
-    let longestWord = "";
-    for (const word of words) {
-        if (word.length > longestWord.length) {
-            longestWord = word;
+        result += array[i];
+        if (i < array.length - 1) {
+            result += ",";
         }
     }
-    return longestWord;
+    return result;
 }
 
-console.log(findLongestWord("The quick brown fox jumped over the lazy dog"));
-
-function formatString(string) {
-    if (string.length <= 40) {
-        return string;
-    } else {
-        return string.slice(0, 40) + "...";
-    }
+function arrayToStringUsingJoin(array) {
+    return array.join(",");
 }
 
-console.log(formatString("This string is exactly forty characters long."));
-console.log(formatString("This string is definitely longer than forty characters long and needs to be shortened."));
+const array = ["apple", "banana", "cherry"];
+console.log(arrayToStringUsingFor(array));
+console.log(arrayToStringUsingJoin(array));
 
-function checkForSpam(message) {
-    const lowercasedMessage = message.toLowerCase();
-    return lowercasedMessage.includes("spam") || lowercasedMessage.includes("sale");
+function removeCard(cards, index) {
+    cards.splice(index, 1);
 }
 
-
-console.log(checkForSpam("Get the best SALE offers now!")); 
-console.log(checkForSpam("Important information about your account")); 
-
-let input;
-const numbers = [];
-let total = 0;
-
-while (true) {
-    input = prompt("Введіть число:");
-
-    if (input === null) {
-        break;
-    }
-
-    input = Number(input);
-
-    if (isNaN(input)) {
-        alert("Було введено не число, попробуйте ще раз");
-        continue;
-    }
-
-    numbers.push(input);
+function addCard(cards, index, newCard) {
+    cards.splice(index, 0, newCard);
 }
 
-if (numbers.length > 0) {
-    for (const number of numbers) {
-        total += number;
-    }
-    console.log(`Загальна сума чисел дорівнює ${total}`);
-} else {
-    console.log("Жодного числа не було введено");
+function updateCard(cards, index, updatedCard) {
+    cards.splice(index, 1, updatedCard);
 }
 
+let cards = ["card1", "card2", "card3"];
+
+removeCard(cards, 1);
+console.log(cards); // ["card1", "card3"]
+
+addCard(cards, 1, "newCard");
+console.log(cards); // ["card1", "newCard", "card3"]
+
+updateCard(cards, 1, "updatedCard");
+console.log(cards); // ["card1", "updatedCard", "card3"]
