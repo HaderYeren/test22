@@ -1,42 +1,25 @@
+const data = [
+    {"name": "John Doe", "balance": 100, "friends": ["Jane Smith", "Jim Brown"], "skills": ["Python", "JavaScript"]},
+    {"name": "Jane Smith", "balance": 150, "friends": ["John Doe"], "skills": ["Java", "Python"]},
+    {"name": "Jim Brown", "balance": 200, "friends": [], "skills": ["C++", "Python"]}
+];
 
-function arrayToStringUsingFor(array) {
-    let result = "";
-    for (let i = 0; i < array.length; i++) {
-        result += array[i];
-        if (i < array.length - 1) {
-            result += ",";
-        }
-    }
-    return result;
+const totalBalance = data.reduce((sum, user) => sum + user.balance, 0);
+console.log("Загальна сума балансу:", totalBalance);
+
+function usersWithFriend(users, friendName) {
+    return users.filter(user => user.friends.includes(friendName)).map(user => user.name);
 }
 
-function arrayToStringUsingJoin(array) {
-    return array.join(",");
-}
+const friendName = "John Doe";
+const namesWithFriend = usersWithFriend(data, friendName);
+console.log(`Користувачі, у яких є друг з ім'ям ${friendName}:`, namesWithFriend);
 
-const array = ["apple", "banana", "cherry"];
-console.log(arrayToStringUsingFor(array));
-console.log(arrayToStringUsingJoin(array));
 
-function removeCard(cards, index) {
-    cards.splice(index, 1);
-}
+const sortedUsersByFriends = [...data].sort((a, b) => b.friends.length - a.friends.length);
+const sortedNamesByFriends = sortedUsersByFriends.map(user => user.name);
+console.log("Користувачі, відсортовані за кількістю друзів:", sortedNamesByFriends);
 
-function addCard(cards, index, newCard) {
-    cards.splice(index, 0, newCard);
-}
 
-function updateCard(cards, index, updatedCard) {
-    cards.splice(index, 1, updatedCard);
-}
-
-let cards = ["card1", "card2", "card3"];
-
-removeCard(cards, 1);
-console.log(cards); // ["card1", "card3"]
-
-addCard(cards, 1, "newCard");
-console.log(cards); // ["card1", "newCard", "card3"]
-
-updateCard(cards, 1, "updatedCard");
-console.log(cards); // ["card1", "updatedCard", "card3"]
+const allSkills = [...new Set(data.flatMap(user => user.skills))].sort();
+console.log("Усі унікальні вміння користувачів:", allSkills);
