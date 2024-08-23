@@ -1,25 +1,16 @@
-const data = [
-    {"name": "John Doe", "balance": 100, "friends": ["Jane Smith", "Jim Brown"], "skills": ["Python", "JavaScript"]},
-    {"name": "Jane Smith", "balance": 150, "friends": ["John Doe"], "skills": ["Java", "Python"]},
-    {"name": "Jim Brown", "balance": 200, "friends": [], "skills": ["C++", "Python"]}
-];
+const button = document.getElementById('myButton');
+const inputField = document.getElementById('inputField');
+button.addEventListener('click', () => {
+    button.textContent = inputField.value;
+});
 
-const totalBalance = data.reduce((sum, user) => sum + user.balance, 0);
-console.log("Загальна сума балансу:", totalBalance);
+const image = document.getElementById('myImage');
+image.src = 'new-image.jpg';
 
-function usersWithFriend(users, friendName) {
-    return users.filter(user => user.friends.includes(friendName)).map(user => user.name);
-}
+const link = document.getElementById('myLink');
+const linkImage = document.getElementById('linkImage');
+link.href = 'https://new-url.com';
+linkImage.alt = 'Опис нового зображення';
 
-const friendName = "John Doe";
-const namesWithFriend = usersWithFriend(data, friendName);
-console.log(`Користувачі, у яких є друг з ім'ям ${friendName}:`, namesWithFriend);
-
-
-const sortedUsersByFriends = [...data].sort((a, b) => b.friends.length - a.friends.length);
-const sortedNamesByFriends = sortedUsersByFriends.map(user => user.name);
-console.log("Користувачі, відсортовані за кількістю друзів:", sortedNamesByFriends);
-
-
-const allSkills = [...new Set(data.flatMap(user => user.skills))].sort();
-console.log("Усі унікальні вміння користувачів:", allSkills);
+const firstItem = document.getElementById('firstItem');
+firstItem.textContent = 'Новий текст для першого елемента';
