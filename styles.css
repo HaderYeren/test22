@@ -4,23 +4,13 @@ body {
   margin: 20px;
 }
 
-.key-display {
+#timer2 {
   font-size: 24px;
   font-weight: bold;
-  margin: 20px 0;
-  color: #2196f3;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #45a049;
+.animate {
+  color: red;
+  font-size: 28px;
+  transition: 0.5s;
 }
