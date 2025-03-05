@@ -1,16 +1,33 @@
 body {
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c36;
+  color: white;
+}
+
+.timer {
+  display: flex;
+  gap: 15px;
+  background: #3a3f4b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.field {
   text-align: center;
-  margin: 20px;
-}
-
-#timer2 {
   font-size: 24px;
-  font-weight: bold;
 }
 
-.animate {
-  color: red;
-  font-size: 28px;
-  transition: 0.5s;
+.value {
+  font-size: 36px;
+  font-weight: bold;
+  display: block;
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.7;
 }

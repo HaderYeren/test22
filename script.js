@@ -1,54 +1,45 @@
-
-let time1 = 60 * 60;
-let timer1Element = document.getElementById("timer1");
-
-function updateTimer1() {
-    let hours = Math.floor(time1 / 3600);
-    let minutes = Math.floor((time1 % 3600) / 60);
-    let seconds = time1 % 60;
-    
-    timer1Element.textContent = 
-        (hours < 10 ? "0" : "") + hours + ":" +
-        (minutes < 10 ? "0" : "") + minutes + ":" +
-        (seconds < 10 ? "0" : "") + seconds;
-    
-    if (time1 === 30 * 60) {
-        alert("Залишилось менше половини часу!");
+class CountdownTimer {
+    constructor({ selector, targetDate }) {
+      this.selector = selector;
+      this.targetDate = targetDate;
+      this.timerId = null;
     }
-
-    if (time1 > 0) {
-        time1--;
-        setTimeout(updateTimer1, 1000);
+  
+    start() {
+      const timerElement = document.querySelector(this.selector);
+  
+      const updateTimer = () => {
+        const now = new Date();
+        const time = this.targetDate - now;
+  
+        if (time <= 0) {
+          clearInterval(this.timerId);
+          timerElement.querySelector('[data-value="days"]').textContent = '00';
+          timerElement.querySelector('[data-value="hours"]').textContent = '00';
+          timerElement.querySelector('[data-value="mins"]').textContent = '00';
+          timerElement.querySelector('[data-value="secs"]').textContent = '00';
+          return;
+        }
+  
+        const days = Math.floor(time / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((time % (1000 * 60)) / 1000);
+  
+        timerElement.querySelector('[data-value="days"]').textContent = days >= 10 ? days : '0' + days;
+        timerElement.querySelector('[data-value="hours"]').textContent = hours < 10 ? '0' + hours : hours;
+        timerElement.querySelector('[data-value="mins"]').textContent = mins < 10 ? '0' + mins : mins;
+        timerElement.querySelector('[data-value="secs"]').textContent = secs < 10 ? '0' + secs : secs;
+      };
+  
+      this.timerId = setInterval(updateTimer, 1000);
     }
-}
-
-updateTimer1();
-
-let timer2Element = document.getElementById("timer2");
-let startButton = document.getElementById("startTimer2");
-let time2 = 30.000;
-let interval2;
-
-function updateTimer2() {
-    time2 -= 1;
-    
-    if (time2 <= 10000) {
-        timer2Element.classList.add("animate");
-    }
-
-    timer2Element.textContent = (time2 / 1000).toFixed(3);
-
-    if (time2 <= 0) {
-        clearInterval(interval2);
-        startButton.disabled = false;
-        timer2Element.textContent = "0.000";
-    }
-}
-
-startButton.addEventListener("click", () => {
-    time2 = 30.000;
-    timer2Element.textContent = "30.000";
-    timer2Element.classList.remove("animate");
-    startButton.disabled = true; 
-    interval2 = setInterval(updateTimer2, 1);
-});
+  }
+  
+  const timer = new CountdownTimer({
+    selector: '#timer-1',
+    targetDate: new Date('Jul 17, 2025 00:00:00'),
+  });
+  
+  timer.start();
+  
